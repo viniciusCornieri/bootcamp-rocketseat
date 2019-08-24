@@ -43,3 +43,28 @@ The server and app class are separated to be easier to test on the following les
 #### 2.3 - Adding the hello world message route
 
 At our routes.js, import the Router from express that it's responsible to create and specify our app routes. To test create a get for root route, that return a json with message hello world.
+
+## 3
+
+#### Adding sucrase and nodemon
+
+Adding sucrase to handle es6 imports and nodemon to automatic restart our server
+when something changed. Both dependencies are imported as Dev because we won't need them in production.
+
+    yarn add sucrase nodemon -D
+
+#### Changing all require for import
+
+Change in all files the `const imp = require('something');` to `import imp from 'something';`, but after that the node command at our server.js will not work anymore because it will complain tha doesn't know import. For now we will use sucrase to run our server, and works fine.
+
+#### Configuring nodemon to run js files with sucrase
+
+At package.json `add` dev script with `nodemon src/server.js`, then create nodemon.json to specify for the nodemon to run js files with sucrase.
+
+    {
+      "execMap": {
+        "js": "sucrase-node"
+      }
+    }
+
+now to run our server and restart on any change just run `yarn dev`
