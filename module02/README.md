@@ -2,6 +2,12 @@
 
 Initiating the GoBarber project
 
+**Table of Contents**
+
+[TOCM]
+
+[TOC]
+
 ## 1 - Initial configs
 
 #### 1.1 - Initial commands
@@ -68,3 +74,42 @@ At package.json `add` dev script with `nodemon src/server.js`, then create nodem
     }
 
 now to run our server and restart on any change just run `yarn dev`
+
+## 4 Docker
+
+#### 4.1 Installing Docker CE
+
+Installing docker CE from [Docker CE - Install](https://docs.docker.com/install/). I followed the steps for install and post-install for Linux, and worked without
+problems.
+
+#### 4.2 Installing Postgres docker
+
+Follow the [Docker HUB - Postgres](https://hub.docker.com/_/postgres) to add
+the postgres image at your docker. I run the following command:
+
+    docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+The difference from the link it's the -p that its a port redirect which the first
+port indicates the user port that will be used and the second port it's the container port to be mapped. We can run ´docker ps´ to see if the command worked and the
+postgres container is online.
+
+##### 4.2.1 Postbird install
+
+We will use [Postbird](https://electronjs.org/apps/postbird) as GUI client for our postgres database.
+
+##### 4.2.2 Configuring Postbird
+
+To connect at postbird at the docker we created, the host it's `localhost`,
+port it's `5432`, the username it's the default `postgres` and the password `docker` that we specified at section [4.2]
+
+##### 4.2.3 Creating App Database
+
+Create gobarber database, all tables and structures will be created by our app.
+
+#### 4.3 Docker commands
+
+- `"docker ps"` - list all active containers.
+- `"docker ps -a"` - list all containers that was activated.
+- `"docker start <container_name/id>"` - start the specified container.
+- `"docker stop <container_name/id>"` - stop the specified container.
+- `"docker logs <container_name/id>"` - show the logs of the container to see any error.
