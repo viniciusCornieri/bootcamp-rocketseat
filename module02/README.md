@@ -20,7 +20,7 @@ Create `src` directory with:
 
 - app.js
 
-  Will contain the server application logic
+  Will contain the server application logic and configuration.
 
 - routes.js
 
@@ -28,4 +28,6 @@ Create `src` directory with:
 
 - server.js
 
-  Will contain server configs
+## Creating App class
+
+Adding app class with middlewares and routes methods responsible to the ours server logic. At middleware added json usage, to allow server to communicate with JSON, and at routes just pass the reference to our routes.js file that will be coded.
