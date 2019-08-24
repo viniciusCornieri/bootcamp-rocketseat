@@ -104,7 +104,7 @@ port it's `5432`, the username it's the default `postgres` and the password `doc
 
 ##### 4.2.3 Creating App Database
 
-Create gobarber database, all tables and structures will be created by our app.
+Create gobarber database. All tables and database structures will be created by our app.
 
 #### 4.3 Docker commands
 
