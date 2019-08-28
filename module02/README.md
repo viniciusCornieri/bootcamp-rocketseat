@@ -1,12 +1,6 @@
 # Bootcamp Rocketseat - Module 02
 
-Initiating the GoBarber project
-
-**Table of Contents**
-
-[TOCM]
-
-[TOC]
+Starting the GoBarber project
 
 ## 1 - Initial configs
 
@@ -58,6 +52,11 @@ Adding sucrase to handle es6 imports and nodemon to automatic restart our server
 when something changed. Both dependencies are imported as Dev because we won't need them in production.
 
     yarn add sucrase nodemon -D
+
+To use:
+yarn sucrase-node src/server.js
+
+or configure `nodemon.json` to use sucrase, see `nodemon.json`.
 
 #### 3.2 - Changing all require for import
 
