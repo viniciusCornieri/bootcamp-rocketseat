@@ -65,13 +65,13 @@ Change in all files the `const imp = require('something');` to `import imp from 
 #### 3.3 - Configuring nodemon to run js files with sucrase
 
 At package.json `add` dev script with `nodemon src/server.js`, then create nodemon.json to specify for the nodemon to run js files with sucrase.
-
+```JSON
     {
       "execMap": {
         "js": "sucrase-node"
       }
     }
-
+```
 now to run our server and restart on any change just run `yarn dev`
 
 ## 4 Docker
@@ -160,3 +160,139 @@ Have only 5 method:
 - store() - create one object
 - update() - update one object
 - delete() - delete one object
+
+## 7 Eslint, Prettier and Editor Config
+
+Enforce code patterns at our project
+
+### 7.1 Eslint
+
+Verify if our code it's following the defined patterns. To install add eslint as
+Dev dependency:
+
+    yarn add -D eslint
+
+after that run:
+
+    yarn eslint --init
+
+Select:
+```
+How would u like to use ESLint?
+- To check syntax, find problems, and enforce code style.
+What type of modules does your project use?
+- Javascript modules (import/export)
+Which framework does your project use?
+- None of these
+Where does your code run?
+- Select only Node
+How would you like to define a style for your project?
+- Use a popular style guide
+Which style guide do you want to follow?
+- Airbnb (http://github...)
+What format do you want your config file to be in?
+- Not matters / but he picked Javascript
+Would you like to install them now with npm?
+- Y
+```
+After that because the dependencies were installed by npm, will create a package-lock.json file, so because we use `yarn` just delete the `package-lock.json` and run a clean:
+
+    yarn
+
+This will rebuild our project correctly with yarn.
+
+At our `.eslintrc.js(on)` we will override some airbnb rules, at rules:
+```JS
+rules: {
+    // Overriding some airbnb rules
+    // forces a class always use this to access methods
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off", // not allow reassign a param
+    "camelcase": "off", // force all variables to follow camelcase
+    // ignore unused declared var if the var name is next,
+    // we will need to at following classes
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next"}],
+
+  },
+```
+
+#### 7.1.1 Vscode Eslint
+
+At VsCode we need the ESLint extension. Add at preferences settings JSON the following
+
+```JSON
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        {
+            "language": "javascript",
+            "autoFix": true
+        },
+        {
+            "language": "javascriptreact",
+            "autoFix": true
+        },
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "typescriptreact",
+            "autoFix": true
+        },
+    ],
+```
+
+### 7.2 Prettier
+
+Install the following as Dev dependencies:
+
+    yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
+
+adjust code styles, and eslint integration.
+
+At `.eslintrc.js(on)`:
+- adds prettier at extends
+
+```JS
+extends: [
+    'airbnb-base',
+    'prettier'
+  ]
+```
+- add prettier at plugins
+```JS
+plugins: [
+    'prettier'
+  ]
+```
+- add a rule for prettier problems be error:
+```JS
+rules: [
+    // prettier rules are considered errors
+    'prettier/prettier': 'error',
+    ...
+  ]
+```
+
+Some prettier rules will conflict with airbnb rules, to resolve just create a
+`.prettierrc` file with:
+```JS
+{
+  "singleQuote": true,
+  "trailingComma": "es5"
+}
+```
+
+Now we can fix all js files at a directory with the command
+
+                  <directory>  <files extension>
+    yarn eslint --fix src --ext js
+
+#### Editor config
+
+Install EditorConfig vscode extension. EditorConfig it's a multi editor configuration that it's very helpful if our devs use different editors. It helps everyone to keep the same styles between editors. After installing it go to explore (`ctrl + shift + e`) and right click -> `generate .editorconfig`, at the generated file change the last two rules to true:
+
+```JS
+trim_trailing_whitespace = true
+insert_final_newline = true
+```
