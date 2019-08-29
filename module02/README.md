@@ -112,3 +112,51 @@ Create gobarber database. All tables and database structures will be created by 
 - `"docker start <container_name/id>"` - start the specified container.
 - `"docker stop <container_name/id>"` - stop the specified container.
 - `"docker logs <container_name/id>"` - show the logs of the container to see any error.
+
+## 5 Sequelize
+
+Sequelize it's a ORM for Node, it's a relational database abstraction.
+No direct use of SQL, all data manipulation happens with Javascript.
+
+#### 5.1 Migrations
+
+- Database version control.
+- Each file has instructions for creation, update, delete of table and columns.
+- Each file it's a migration and its ordered by date.
+
+Migration have an `up` that it's the instruction that will be executed if everything it's ok, and a `down` that it's the rollback instructions if something goes wrong.
+
+Migration can only be edited at his development phase. After the migrations was commited and used by other devs or put in production, **it can NEVER EVER be edited anymore**. After that should create a new migration to do the changes.
+
+Each migration should only change one table.
+
+#### 5.2 Seeds
+
+Files that populate our database for tests or develop environment.
+
+- They are executed by code.
+- It will never be used in production, for production use a Migration.
+
+## 6 MVC
+
+Model - Is only responsible to manipulate the database data. It will not contain
+any business logic.
+
+Controller - It's the entry point of our application requests, a route usually is associated with a controller function. Most of business logic will be here.
+
+View - It's the client return, at non REST projects will be the HTML. At our
+API REST server project it's just our a JSON response.
+
+#### 6.1 Controller
+
+- Class
+- Always return a JSON
+- Never calls another controller.
+
+Have only 5 method:
+
+- index() - Lists the objects
+- show() - show only one object
+- store() - create one object
+- update() - update one object
+- delete() - delete one object
