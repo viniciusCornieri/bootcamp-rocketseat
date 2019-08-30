@@ -326,3 +326,8 @@ See at [Sequelize.org/dialects](https://sequelize.org/master/manual/dialects.htm
 
     yarn add pg pg-hstore
 
+## 9 Dotenv
+
+Dotenv it's used to avoid share secret information, see more at https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/
+
+
