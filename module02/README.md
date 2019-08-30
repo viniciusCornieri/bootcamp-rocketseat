@@ -103,7 +103,7 @@ port it's `5432`, the username it's the default `postgres` and the password `doc
 
 ##### 4.2.3 Creating App Database
 
-Create gobarber database. All tables and database structures will be created by our app.
+Create goBarber database. All tables and database structures will be created by our app.
 
 #### 4.3 Docker commands
 
@@ -296,3 +296,33 @@ Install EditorConfig vscode extension. EditorConfig it's a multi editor configur
 trim_trailing_whitespace = true
 insert_final_newline = true
 ```
+## 8 Structuring our project to use Sequelize
+
+First create at `src` directory  the following directories structure tree:
+
+        src
+        |__app
+        |   |__controllers
+        |   |__models
+        |
+        |__config
+        |
+        |__database
+             |__migrations
+
+Install Sequelize at our project:
+
+    yarn add sequelize
+
+After that install as dev dependency the CLI for sequelize:
+
+    yarn add sequelize-cli -D
+
+Create a file `.sequelizerc` responsible to exports our config, migrations and database files.
+
+**OBS** Both database.js and .sequelizerc need to use commonJS pattern, because the sequelize-cli will not understand import/export pattern.
+
+See at [Sequelize.org/dialects](https://sequelize.org/master/manual/dialects.html) some configs for our `database.js`. For postgres we need to install:
+
+    yarn add pg pg-hstore
+
