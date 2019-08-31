@@ -360,7 +360,7 @@ Create `src/app/models/User.js`, at the super.init() we pass the columns defined
 
 The file responsible to load our model and connect with our database will be our `src/database/index.js`.
 
-## 13 Crypting the password with bcryptjs
+## 13 Encrypting the password with bcryptjs
 
 Install bcryptjs with;
 
@@ -377,3 +377,29 @@ At our model we can create hooks to manipulate the data before or after somethin
       }
     });
 ```
+
+## 14 JWT
+
+`J`SON `W`eb `T`oken or just `JWT` it's the pattern that we will use to authentic the users of our application APIs.
+
+We will create some endpoint responsible to authenticate the user like:
+
+```JS
+POST http://api.com/sessions
+{
+  "email": "exemple@test.com",
+  "password": "123456"
+}
+```
+
+The request will respond with the `JWT Token`, the token it's divided in three encrypted parts separated by DOT:
+- 'Headers' -> with some information about the token, like token type and encrypt algorithm.
+- 'Payload' -> additional data that we can pass with the token, like user email, user id and other `non-sensitive` data.
+- 'Signature' -> the token signature like checksum, used to verify if the token haven't been modified.
+
+We will use `jsonwebtoken` module to authenticate at our application:
+
+    yarn add jsonwebtoken
+
+At second parameter of `jwt.sign` we should pass some string that it's unique and `SECRET`, i will use `dotenv` for that, for our application. To get this string we can use the [md5Online](https://www.md5online.org/).
+
