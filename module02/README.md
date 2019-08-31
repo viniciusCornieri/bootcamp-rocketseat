@@ -330,4 +330,26 @@ See at [Sequelize.org/dialects](https://sequelize.org/master/manual/dialects.htm
 
 Dotenv it's used to avoid share secret information, see more at https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/
 
+## 10 Creating our First Migration
+
+We can use the sequelize-cli as scaffolding for our migrations:
+
+    yarn sequelize migration:create --name=create-users
+
+After editing the created migration run the following command to apply the migration:
+
+    yarn sequelize db:migrate
+
+After that we can go to `postbird` and update our table list to see the table we created.
+
+If at development stage we need to edit/undo something at the recent migration we can run
+
+    yarn sequelize db:migrate:undo
+
+That will undo the last applied migration, or
+
+    yarn sequelize db:migrate:undo:all
+
+This command will undo all migrations.
+
 
