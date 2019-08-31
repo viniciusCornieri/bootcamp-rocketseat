@@ -356,3 +356,6 @@ This command will undo all migrations.
 
 Create `src/app/models/User.js`, at the super.init() we pass the columns defined at the migration as parameters, but we can skip the primaryKey and the created_at/updated_at that is auto-filled. Only the columns that interact with the user.
 
+## 12 Creating Loader for our model
+
+The file responsible to load our model and connect with our database will be our `src/database/index.js`.
