@@ -411,3 +411,11 @@ We will create the auth middleware to handle request which need the valid token,
 
 To handle asynchronous function that have use the old callback pattern.
 
+## 15 Yup for schema validation
+
+We will use Yup for validate our define schema with the request information we received,
+
+    yarn add yup
+
+
+
