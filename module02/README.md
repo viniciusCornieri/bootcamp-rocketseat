@@ -352,4 +352,7 @@ That will undo the last applied migration, or
 
 This command will undo all migrations.
 
+## 11 Creating the Model
+
+Create `src/app/models/User.js`, at the super.init() we pass the columns defined at the migration as parameters, but we can skip the primaryKey and the created_at/updated_at that is auto-filled. Only the columns that interact with the user.
 
