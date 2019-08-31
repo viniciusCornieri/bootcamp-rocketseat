@@ -378,7 +378,7 @@ At our model we can create hooks to manipulate the data before or after somethin
     });
 ```
 
-## 14 JWT
+## 14 JWT - Authentication
 
 `J`SON `W`eb `T`oken or just `JWT` it's the pattern that we will use to authentic the users of our application APIs.
 
@@ -402,4 +402,12 @@ We will use `jsonwebtoken` module to authenticate at our application:
     yarn add jsonwebtoken
 
 At second parameter of `jwt.sign` we should pass some string that it's unique and `SECRET`, i will use `dotenv` for that, for our application. To get this string we can use the [md5Online](https://www.md5online.org/).
+
+#### 14.1 Creating the authorization middleware
+
+We will create the auth middleware to handle request which need the valid token, that will be passes as `Authorization` at request header, its a pattern to put `Bearer` followed by a space before our token value at the header.
+
+#### 14.2 Promisify
+
+To handle asynchronous function that have use the old callback pattern.
 
