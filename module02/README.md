@@ -359,3 +359,21 @@ Create `src/app/models/User.js`, at the super.init() we pass the columns defined
 ## 12 Creating Loader for our model
 
 The file responsible to load our model and connect with our database will be our `src/database/index.js`.
+
+## 13 Crypting the password with bcryptjs
+
+Install bcryptjs with;
+
+    yarn add bcryptjs
+
+Import bcrypt at our user model, now we can create a new field at users with the `Sequelize.VIRTUAL` type which indicates that field does not exists at our database.
+
+At our model we can create hooks to manipulate the data before or after something, with this we can encrypt the given user password like this:
+
+```JS
+    this.addHook('beforeSave', async user => {
+      if (user.password) {
+        user.password_hash = await bcrypt.hash(user.password, 8);
+      }
+    });
+```
