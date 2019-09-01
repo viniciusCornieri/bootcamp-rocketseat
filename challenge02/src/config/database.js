@@ -1,3 +1,4 @@
+// need to be in commonJS to sequelize-cli works
 require('dotenv/config');
 
 module.exports = {
