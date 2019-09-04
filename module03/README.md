@@ -44,3 +44,32 @@ At last add at `database/index.js` the map for the call of associate of our mode
 ```JS
 .map(model => model.associate && model.associate(this.connection.models));
 ```
+## 3 Creating the Providers route
+
+The providers route will retrieve all the users that it's a provider, and will retrieve the avatar association too with find.All
+
+```JS
+ const providers = await User.findAll({
+      where: { provider: true },
+      attributes: ['id', 'name', 'email', 'avatar_id'],
+      include: [
+        { model: File, as: 'avatar', attributes: ['name', 'path', 'url'] },
+      ],
+    });
+```
+
+The attributes defines what we want to retrieve. The include inform the relations we want to bring, the `as: 'avatar'` was put at the `static associate` of User model too, to rename the association name.
+
+### 3.1 Creating the files route
+
+The files route will send the specified image, at `src/app.js` we can create a middleware to handle the requests
+
+```JS
+    // this creates a route that will respond with the static file specified at the route parameter
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
+```
+
+The express.static sends a file from the server.
