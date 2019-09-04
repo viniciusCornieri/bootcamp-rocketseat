@@ -56,7 +56,7 @@ class UserController {
     const user = await User.findByPk(request.userId);
 
     // verify if it's changing the email and if it's already exists
-    if (email !== user.email) {
+    if (email && email !== user.email) {
       const userExists = await User.findOne({ where: { email } });
       if (userExists) {
         response.status(400).json({ error: 'User already exists' });

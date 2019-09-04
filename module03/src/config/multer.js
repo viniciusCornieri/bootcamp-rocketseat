@@ -6,6 +6,7 @@ export default {
   storage: multer.diskStorage({
     destination: resolve(__dirname, '..', '..', 'tmp', 'uploads'), // here can be a CDN like s3
     filename: (request, file, callback) => {
+      // randomize the file name
       crypto.randomBytes(16, (err, response) => {
         if (err) return callback(err);
         return callback(
