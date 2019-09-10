@@ -106,3 +106,33 @@ We will install `date-fns` to help us to do date validation,
 
 the `@next` give us the most updated version.
 
+#### 4.3 Listing Appointments
+
+For listing appointments we will filter all appoints of the token `userId` and get all not cancelled appointment of that user ordered by date. We will get the information about the provider and his avatar stacking the includes at the findAll like this,
+
+```JS
+const appointments = await Appointment.findAll({
+      where: {
+        user_id: request.userId,
+        cancelled_at: null,
+      },
+      order: ['date'],
+      attributes: ['id', 'date'],
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+        },
+      ],
+    });
+```
+
+In the attributes of the relations we NEED to pass the ID because the sequelize need it for resolve the dependency, and for avatar we need the path too, because the URL get need it for build the URL.
