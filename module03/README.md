@@ -97,3 +97,12 @@ We can specify the timezone of our date adding a `T` between the date and hour a
 ```
 
 The sequelize will handle correctly the date with the Timezone.
+
+#### 4.2 Adding date-fns
+
+We will install `date-fns` to help us to do date validation,
+
+    yarn add date-fns@next
+
+the `@next` give us the most updated version.
+
