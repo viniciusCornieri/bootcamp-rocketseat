@@ -86,3 +86,14 @@ Here a important point is that if some Model has two or more relation with the t
 ```
 
 We need do give the relation the `as` nickname, if we don't specify it the sequelize will cannot resolve each one should use.
+
+#### 4.1 passing timezone request json body
+
+We can specify the timezone of our date adding a `T` between the date and hour and at the end specify the hour difference of our timezone, for example `UTC -03` will be:
+```JSON
+{
+	"date": "2019-07-01T18:00:00-03:00"
+}
+```
+
+The sequelize will handle correctly the date with the Timezone.
