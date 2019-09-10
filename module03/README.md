@@ -73,3 +73,16 @@ The files route will send the specified image, at `src/app.js` we can create a m
 ```
 
 The express.static sends a file from the server.
+
+### 4 creating the appointment migration and controller
+
+Here a important point is that if some Model has two or more relation with the the same Model like,
+
+```JS
+  static associate(models) {
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.belongsTo(models.User, { foreignKey: 'provider_id', as: 'provider' });
+  }
+```
+
+We need do give the relation the `as` nickname, if we don't specify it the sequelize will cannot resolve each one should use.
