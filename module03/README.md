@@ -136,3 +136,13 @@ const appointments = await Appointment.findAll({
 ```
 
 In the attributes of the relations we NEED to pass the ID because the sequelize need it for resolve the dependency, and for avatar we need the path too, because the URL get need it for build the URL.
+
+#### 4.4 Appointments pagination
+
+To handle multiple appointments at the get, we will add pagination as query parameter. We will can specify the `?page=` we want to bring and our controller will handle it. At the `findAll` we will add the properties:
+```JS
+      limit: 20,
+      offset: (page - 1) * 20,
+```
+
+The `limit` will specify the maximum number of register the will bring, and the `offset` specifies for which result the find will start to count the limit.
