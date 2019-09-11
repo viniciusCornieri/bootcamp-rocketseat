@@ -146,3 +146,18 @@ To handle multiple appointments at the get, we will add pagination as query para
 ```
 
 The `limit` will specify the maximum number of register the will bring, and the `offset` specifies for which result the find will start to count the limit.
+
+### 5 Creating the Schedule Controller
+
+The Schedule controller will list all the appointment of a given provider at some specified date from query parameter. Here we will user the `startOfDay` and `endOfDay` of `date-fns`, to get the first hour and the last hour of the specified date. The `[Op.between]` is from sequelize Op that give to us several operators to use in our find queries, we need to put it in braces to be our object property.
+
+```JS
+    const appointments = await Appointment.findAll({
+      where: {
+        provider_id: request.userId,
+        cancelled_at: null,
+        date: { [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)] },
+      },
+      order: ['date'],
+    });
+```
