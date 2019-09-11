@@ -161,3 +161,45 @@ The Schedule controller will list all the appointment of a given provider at som
       order: ['date'],
     });
 ```
+
+### 6 Non Relational database (MongoDB)
+
+We will use a non relational database because we will have data that doesn't have relation and need to be store on a performative way. On this project we will user the `MongoDB` database, to start we will use docker to run the image from MongoDb:
+
+    docker run --name <container_name> -p 27017:27017 -d -t mongo
+
+To start the container just:
+
+    docker start <container_name>
+
+Accessing the `localhost:27017` should return the following message if everything it's ok:
+
+    It looks like you are trying to access MongoDB over HTTP on the native driver port.
+
+#### 6.1 Installing mongoose at our project
+
+As the sequelize is our ORM for relational database we will have the `mongoose` with the same purpose. To add:
+
+    yarn add mongoose
+
+The configuration we will do at `src/database/index.js`, adding the `mongo()` method:
+```JS
+mongo() {
+    this.mongoConnection = mongoose.connect(
+      'mongodb://localhost:27017/gobarber',
+      {
+        useNewUrlParser: true,
+        useFindAndModify: true,
+        useUnifiedTopology: true,
+      }
+    );
+  }
+```
+
+We will create the connection passing the URL where our mongoDB is and some parameters. The `useNewUrlParser` that specify we are using the new url format and the `useFindAndModify` that is a config we will use that how the DB will act when its finding and modifying registers. I got the message:
+
+    (node:20547) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+
+So I added the `useUnifiedTopology` too, to avoid the warning.
+
+Do not forget to put the `this.mongo()` at the Database constructor.
