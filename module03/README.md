@@ -203,3 +203,14 @@ We will create the connection passing the URL where our mongoDB is and some para
 So I added the `useUnifiedTopology` too, to avoid the warning.
 
 Do not forget to put the `this.mongo()` at the Database constructor.
+
+#### 6.2 Appointment notifications
+
+We will use the mongoDB to store the appointment notification of the provider, that will be send when a new appointment is schedule. The mongo use schemas that is like our model/table of relational database, however the schema is free, that is each data can be have a different structure from each other in that schema. The schemas can change without the need of a migration like sequelize.
+
+Inside our `app` dir we created the schemas dir to put our mongo schemas, and created the `Notification.js`. We will build the content message at the moment the appointment is created with the user name and the date, in this way we will not need a relation with that user gaining performance using a non-relation database. In a meanwhile, if the user change his name the message will not change, this is a behavior that we are willing to afford when using mongo to gain performance.
+
+#### 6.3 MongoDB compass UI
+
+We will use the mongoDB compass community to see our mongoDB information.
+
