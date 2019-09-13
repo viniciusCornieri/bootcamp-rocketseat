@@ -67,6 +67,15 @@ class AppointmentController {
     }
 
     /**
+     * checks if the user it's making an appointment with itself
+     */
+    if (provider_id === request.userId) {
+      return response
+        .status(401)
+        .json({ error: 'You can not create an appointment with yourself' });
+    }
+
+    /**
      * Check if the date is after the current date
      */
     const hourStart = startOfHour(parseISO(date));
