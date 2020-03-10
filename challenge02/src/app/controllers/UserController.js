@@ -13,14 +13,18 @@ class UserController {
         .min(6),
     });
 
-    await schema.validate(request.body).catch(err => {
+    try {
+      await schema.validate(request.body, { abortEarly: false });
+    } catch (err) {
       return response
         .status(400)
-        .json({ error: 'Validation fails', message: err.errors });
-    });
+        .json({ error: 'Validation failed', message: err.errors });
+    }
+
     const userExists = await User.findOne({
       where: { email: request.body.email },
     });
+
     if (userExists) {
       return response.status(400).json({ error: 'User already exists' });
     }
@@ -51,13 +55,14 @@ class UserController {
     } catch (err) {
       return response
         .status(400)
-        .json({ error: 'Validation fails', message: err.errors });
+        .json({ error: 'Validation failed', message: err.errors });
     }
+
     const { email, oldPassword } = request.body;
 
     const user = await User.findByPk(request.userId);
 
-    if (email !== user.email) {
+    if (email && email !== user.email) {
       const userExists = User.findOne({ where: { email } });
       if (userExists) {
         return response.status(400).json({ error: 'Email already used' });

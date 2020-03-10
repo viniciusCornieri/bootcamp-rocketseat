@@ -3,11 +3,11 @@ module.exports = {
     es6: true,
     node: true,
   },
-  plugins:[
-    'prettier'
-   ],
   extends: [
     'airbnb-base',
+    'prettier'
+  ],
+  plugins:[
     'prettier'
   ],
   globals: {

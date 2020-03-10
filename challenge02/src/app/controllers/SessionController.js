@@ -12,11 +12,13 @@ class SessionController {
       password: Yup.string().required(),
     });
 
-    schema.validate(request.body).catch(err => {
-      response
+    try {
+      await schema.validate(request.body, { abortEarly: false });
+    } catch (err) {
+      return response
         .status(400)
-        .json({ error: 'Validation Fails', message: err.errors });
-    });
+        .json({ error: 'Validation failed', message: err.errors });
+    }
 
     const { email, password } = request.body;
 

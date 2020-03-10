@@ -1,49 +1,17 @@
-# Desafio 02. Iniciando aplicação
+# Challenge 02
 
-Segundo desafio proposto pela rocketseat, seguem as regras:
+This is the first step of four to the Rocketseat's Bootcamp final challenge. For the final challenge we will build a complete application (backend, frontend and mobile) for a generic shipping company, that will be called here as FastFeet.
+At this step we will begin to build the backend with the following features:
 
-Crie uma aplicação do zero utilizando Express.
+## Features
 
-Nessa aplicação configure as seguintes ferramentas:
+### Authentication
 
-- Sucrase + Nodemon;
-- ESLint + Prettier + EditorConfig;
-- Sequelize (Utilize PostgresSQL ou MySQL);
+- Allow a user to login using a email and password. The authentication need to be done using JWT and the endpoint input should be validated.
+- Create a seed to populate the first admin user that will be used to login at our app.
 
-Durante esse desafio você dará início a um novo projeto no Bootcamp, esse projeto será desenvolvido aos poucos até o fim da sua jornada onde você terá uma aplicação completa envolvendo back-end, front-end e mobile.
+### Recipients Management
 
-Esse projeto também será utilizado para a certificação do bootcamp, então bora pro código!
-
-## Aplicação
-
-A aplicação que iremos dar início ao desenvolvimento a partir de agora é um app agregador de eventos para desenvolvedores chamado Meetapp (um acrônimo à Meetup + App).
-
-Nesse primeiro desafio vamos criar algumas funcionalidades básicas que aprendemos ao longo das aulas até aqui.
-
-## Funcionalidades
-
-Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação.
-
-### Autenticação
-
-Permita que um usuário se autentique em sua aplicação utilizando e-mail e senha.
-
-- A autenticação deve ser feita utilizando JWT.
-- Realize a validação dos dados de entrada;
-
-### Cadastro e atualização de usuários
-
-Permita que novos usuários se cadastrem em sua aplicação utilizando nome, e-mail e senha.
-
-Para atualizar a senha, o usuário deve também enviar um campo de confirmação com a mesma senha.
-
-- Criptografe a senha do usuário para segurança.
-- Realize a validação dos dados de entrada;
-
-## Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção, mas você pode ver o resultado do código do desafio aqui: https://github.com/Rocketseat/bootcamp-gostack-desafio-02
-
-Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
-“Não espere para plantar, apenas tenha paciência para colher”!
+- Allow to create and update recipients that has the following field, recipient's name and address fields: street, number, complement, state, city, zip code.
+- Only registered administrator users can create/update recipients.
+- Recipients cannot sign in at our application.
