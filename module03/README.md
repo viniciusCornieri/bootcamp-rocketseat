@@ -2,13 +2,13 @@
 
 ## Continuing GoBarber API
 
-## 1 Configuring Multer to File Upload
+## 1. Configuring Multer to File Upload
 
 We'll make the file upload apart from the user creation API, so we will only pass the file id for the user avatar at the user register moment. To send files we need to use multipart/form-data, for it we will use multer:
 
     yarn add multer
 
-## 2 Model relations
+## 2. Model relations
 
 We created the File model and migration, to save the file path and name inside our database. Now we created a new migration add-avatar-field-to-users that add a new column at users table which makes a reference to the files table.
 
@@ -44,7 +44,7 @@ At last add at `database/index.js` the map for the call of associate of our mode
 ```JS
 .map(model => model.associate && model.associate(this.connection.models));
 ```
-## 3 Creating the Providers route
+## 3. Creating the Providers route
 
 The providers route will retrieve all the users that it's a provider, and will retrieve the avatar association too with find.All
 
@@ -60,7 +60,7 @@ The providers route will retrieve all the users that it's a provider, and will r
 
 The attributes defines what we want to retrieve. The include inform the relations we want to bring, the `as: 'avatar'` was put at the `static associate` of User model too, to rename the association name.
 
-### 3.1 Creating the files route
+### 3.1. Creating the files route
 
 The files route will send the specified image, at `src/app.js` we can create a middleware to handle the requests
 
@@ -74,7 +74,7 @@ The files route will send the specified image, at `src/app.js` we can create a m
 
 The express.static sends a file from the server.
 
-### 4 creating the appointment migration and controller
+## 4. creating the appointment migration and controller
 
 Here a important point is that if some Model has two or more relation with the the same Model like,
 
@@ -87,7 +87,7 @@ Here a important point is that if some Model has two or more relation with the t
 
 We need do give the relation the `as` nickname, if we don't specify it the sequelize will cannot resolve each one should use.
 
-#### 4.1 passing timezone request json body
+### 4.1. passing timezone request json body
 
 We can specify the timezone of our date adding a `T` between the date and hour and at the end specify the hour difference of our timezone, for example `UTC -03` will be:
 ```JSON
@@ -98,7 +98,7 @@ We can specify the timezone of our date adding a `T` between the date and hour a
 
 The sequelize will handle correctly the date with the Timezone.
 
-#### 4.2 Adding date-fns
+### 4.2. Adding date-fns
 
 We will install `date-fns` to help us to do date validation,
 
@@ -106,7 +106,7 @@ We will install `date-fns` to help us to do date validation,
 
 the `@next` give us the most updated version.
 
-#### 4.3 Listing Appointments
+### 4.3. Listing Appointments
 
 For listing appointments we will filter all appoints of the token `userId` and get all not cancelled appointment of that user ordered by date. We will get the information about the provider and his avatar stacking the includes at the findAll like this,
 
@@ -137,7 +137,7 @@ const appointments = await Appointment.findAll({
 
 In the attributes of the relations we NEED to pass the ID because the sequelize need it for resolve the dependency, and for avatar we need the path too, because the URL get need it for build the URL.
 
-#### 4.4 Appointments pagination
+### 4.4. Appointments pagination
 
 To handle multiple appointments at the get, we will add pagination as query parameter. We will can specify the `?page=` we want to bring and our controller will handle it. At the `findAll` we will add the properties:
 ```JS
@@ -147,7 +147,7 @@ To handle multiple appointments at the get, we will add pagination as query para
 
 The `limit` will specify the maximum number of register the will bring, and the `offset` specifies for which result the find will start to count the limit.
 
-### 5 Creating the Schedule Controller
+## 5. Creating the Schedule Controller
 
 The Schedule controller will list all the appointment of a given provider at some specified date from query parameter. Here we will user the `startOfDay` and `endOfDay` of `date-fns`, to get the first hour and the last hour of the specified date. The `[Op.between]` is from sequelize Op that give to us several operators to use in our find queries, we need to put it in braces to be our object property.
 
@@ -162,9 +162,9 @@ The Schedule controller will list all the appointment of a given provider at som
     });
 ```
 
-### 6 Non Relational database (MongoDB)
+## 6. Non Relational database (MongoDB)
 
-We will use a non relational database because we will have data that doesn't have relation and need to be store on a performative way. On this project we will user the `MongoDB` database, to start we will use docker to run the image from MongoDb:
+We will use a non relational database because we have data that doesn't have relation and need to be store on a performative way. On this project we will use the `MongoDB` database. To start it using docker, run the image from MongoDb:
 
     docker run --name <container_name> -p 27017:27017 -d -t mongo
 
@@ -176,9 +176,9 @@ Accessing the `localhost:27017` should return the following message if everythin
 
     It looks like you are trying to access MongoDB over HTTP on the native driver port.
 
-#### 6.1 Installing mongoose at our project
+### 6.1. Installing mongoose at our project
 
-As the sequelize is our ORM for relational database we will have the `mongoose` with the same purpose. To add:
+As the `sequelize` is our ORM for relational database we will have the `mongoose` with the same purpose. To add:
 
     yarn add mongoose
 
@@ -196,7 +196,7 @@ mongo() {
   }
 ```
 
-We will create the connection passing the URL where our mongoDB is and some parameters. The `useNewUrlParser` that specify we are using the new url format and the `useFindAndModify` that is a config we will use that how the DB will act when its finding and modifying registers. I got the message:
+Create the connection passing the URL where our mongoDB is and some parameters. The `useNewUrlParser` that specify we are using the new url format and the `useFindAndModify` that is how the DB will act when its finding and modifying registers. I got the message:
 
     (node:20547) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
 
@@ -204,13 +204,47 @@ So I added the `useUnifiedTopology` too, to avoid the warning.
 
 Do not forget to put the `this.mongo()` at the Database constructor.
 
-#### 6.2 Appointment notifications
+### 6.2. Appointment notifications
 
 We will use the mongoDB to store the appointment notification of the provider, that will be send when a new appointment is schedule. The mongo use schemas that is like our model/table of relational database, however the schema is free, that is each data can be have a different structure from each other in that schema. The schemas can change without the need of a migration like sequelize.
 
-Inside our `app` dir we created the schemas dir to put our mongo schemas, and created the `Notification.js`. We will build the content message at the moment the appointment is created with the user name and the date, in this way we will not need a relation with that user gaining performance using a non-relation database. In a meanwhile, if the user change his name the message will not change, this is a behavior that we are willing to afford when using mongo to gain performance.
+Inside our `app` dir we created the schemas dir to put our mongo schemas, and created the `Notification.js`. We will build the content message at the moment the appointment is created with the user name and the date, in this way we will not need a relation with that user gaining performance using a non-relational database. In a meanwhile, if the user change his name the message will not change, this is a behavior that we are willing to afford when using mongo to gain performance.
 
-#### 6.3 MongoDB compass UI
+### 6.3. MongoDB compass UI
 
 We will use the mongoDB compass community to see our mongoDB information.
 
+## 7. Nodemailer
+
+When handling appointment cancellation we should warn the provider, here we will do by sending the provider an email using nodemailer. First add to our project:
+
+    yarn add nodemailer
+
+Next create `config/mail.js` with our configurations to send mail, like:
+
+```JS
+export default {
+  host: '',
+  port: '',
+  secure: false /* https */,
+  auth: {
+    user: '',
+    pass: '',
+  },
+  default: {
+    from: 'Equipe GoBarber <noreply@gobarber.com>',
+  },
+};
+```
+To get configurations we need to use some `SMTP` provider as:
+- Amazon SES
+- Mailgun
+- Sparkpost
+- Mandril (Mailchimp)
+- Mailtrap **(only works for development environment)**
+
+To our course we will use `Mailtrap` because it's free for development environment.
+
+### 7.1. Mailtrap
+
+Sign up at [Mailtrap.io signup](https://mailtrap.io/register/signup?ref=hero), after sign up we will have access to one inbox that we can edit or delete and create another, at the inbox will have the configurations(`host`, `port`, `user`, `pass`) for our nodemailer.
