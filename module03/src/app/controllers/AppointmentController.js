@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
+import { Op } from 'sequelize';
 import User from '../models/User';
 import Appointment from '../models/Appointment';
 import File from '../models/File';
@@ -133,8 +134,24 @@ class AppointmentController {
           as: 'provider',
           attributes: ['name', 'email'],
         },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
       ],
     });
+    if (!appointment) {
+      return response.status(404).json({
+        error: `Not found Appointment ${request.params.id} to cancel.`,
+      });
+    }
+
+    if (appointment.cancelled_at != null) {
+      return response.status(400).json({
+        error: `Appointment ${request.params.id} is already cancelled.`,
+      });
+    }
     /**
      * checks if the logged user owns the appointment
      */
@@ -157,7 +174,14 @@ class AppointmentController {
     await Mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
       subject: 'Agendamento cancelado',
-      text: 'Você tem um novo cancelamento',
+      template: 'cancellation',
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: format(appointment.date, "'dia' dd 'de' MMMM', às' H:mm'h'", {
+          locale: pt,
+        }),
+      },
     });
 
     return response.json(appointment);

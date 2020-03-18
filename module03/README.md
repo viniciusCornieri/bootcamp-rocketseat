@@ -248,3 +248,20 @@ To our course we will use `Mailtrap` because it's free for development environme
 ### 7.1. Mailtrap
 
 Sign up at [Mailtrap.io signup](https://mailtrap.io/register/signup?ref=hero), after sign up we will have access to one inbox that we can edit or delete and create another, at the inbox will have the configurations(`host`, `port`, `user`, `pass`) for our nodemailer.
+
+### 7.2. Template Engines - Handlebars
+
+Template engine are html templates to be used with node to build custom html emails using a template. In this project we will use `Handlebars` for define our html template. First we will add the handlebars integration with the express and the nodemailer: dependencies:
+
+    yarn add express-handlebars nodemailer-express-handlebars
+
+Next create the following folder structure that will be used to place the email templates
+
+    src
+    |__app
+    |   |__views
+    |   |   |__emails
+    |   |   |   |__layouts
+    |   |   |   |__partials
+    ________________________
+
