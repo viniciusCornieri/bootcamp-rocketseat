@@ -265,3 +265,19 @@ Next create the following folder structure that will be used to place the email 
     |   |   |   |__partials
     ________________________
 
+## 8. Queues/Background Jobs
+
+When we send the appointment cancel email by the request we need to wait until the email is send to return the response, we can remove the await but if something goes wrong when sending the email, the error tracking will be difficult. To handle this situations we can use background jobs, in our case we will use Redis database with some queue manager.
+
+    docker run --name redisbarber -p 6379:6379 -d -t redis:alpine
+
+For handling the queue we have two options:
+
+- [Bee Queue](https://github.com/bee-queue/bee-queue), work's with redis and have great performance but doesn't have much customization to handle queue priority.
+- [Kue](https://github.com/Automattic/kue) less performance but more robust.
+
+We will use the first option for this project:
+
+    yarn add bee-queue
+
+At `lib/Queue.js` each queue will be configured for each needed job (e.g. a queue for appointment cancellation, other to email confirmation)
