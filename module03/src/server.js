@@ -1,5 +1,4 @@
-import { config as dotenvConfig } from 'dotenv';
+import 'dotenv/config';
 import app from './app';
 
-dotenvConfig();
 app.listen(3333);
