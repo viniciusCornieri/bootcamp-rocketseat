@@ -1,20 +1,23 @@
 # Frontend with ReactJS  <!-- omit in toc -->
-- [Adding React to the project](#adding-react-to-the-project)
-- [Concepts](#concepts)
-  - [Adding babel and webpack to the project](#adding-babel-and-webpack-to-the-project)
-- [Configuring babel](#configuring-babel)
-  - [Babel CLI](#babel-cli)
-- [Configuring Webpack](#configuring-webpack)
-  - [Webpack-dev-server (live Reload)](#webpack-dev-server-live-reload)
-- [Componentization](#componentization)
-- [React Properties](#react-properties)
+- [1. Adding React to the project](#1-adding-react-to-the-project)
+- [2. Concepts](#2-concepts)
+  - [2.1. Adding babel and webpack to the project](#21-adding-babel-and-webpack-to-the-project)
+- [3. Configuring babel](#3-configuring-babel)
+  - [3.1. Babel CLI](#31-babel-cli)
+- [4. Configuring Webpack](#4-configuring-webpack)
+  - [4.1 Webpack-dev-server (live Reload)](#41-webpack-dev-server-live-reload)
+- [5. Componentization](#5-componentization)
+- [6. React Properties](#6-react-properties)
+- [7. State and Immutability](#7-state-and-immutability)
+  - [7.1 State](#71-state)
+  - [7.2 Immutability](#72-immutability)
   
-## Adding React to the project
+## 1. Adding React to the project
 
     yarn add react react-dom
 
 - react-dom it's the react lib used for web development to manipulate the dom.
-## Concepts
+## 2. Concepts
 
 - **Babel**
 
@@ -24,11 +27,11 @@ To use the react functionalities we need the Babel which is responsible to trans
 
 For each file type (.js, .css, .png) it will converter the code following the given loaders, e.g., babel-loader, css-loader, image-loader;
 
-### Adding babel and webpack to the project
+### 2.1. Adding babel and webpack to the project
 
     yarn add @babel/core @babel/preset-env @babel/preset-react webpack webpack-cli
 
-## Configuring babel
+## 3. Configuring babel
 
 In the `babel.config.js` add 
 ```JS
@@ -44,14 +47,14 @@ The presets are third-parties babel configurations that we can load,
 - @babel/preset-env: will make the babel transpile our code accordingly with the environment that the code will be run.
 - @babel/preset-react: will transpile the js code that use the react like JSX features to a JS that browsers understand.
 
-### Babel CLI
+### 3.1. Babel CLI
 To transpile manually:
 
     yarn add @babel/cli
 
     yarn babel src/index.js --out-file public/bundle.js
   
-## Configuring Webpack
+## 4. Configuring Webpack
 
   Webpack will automate the transpile the code using the configured loaders. To begin, install the babel-loader, `yarn add babel-loader`, and then create the `webpack.config.js` file with the configs:
 
@@ -81,7 +84,7 @@ module.exports = {
 
     yarn webpack --mode development
   
-  ### Webpack-dev-server (live Reload)
+  ### 4.1 Webpack-dev-server (live Reload)
 
       yarn add webpack-dev-server -D
 
@@ -97,7 +100,7 @@ module.exports = {
 
       yarn webpack-dev-server --mode development
 
-## Componentization
+## 5. Componentization
 
 A fundamental concept around React is the componentization, all the frontend is build creating and assembling web components made in react.
 
@@ -111,7 +114,7 @@ return (<Header /><Header />);
 // right:
 return (<><Header /><Header /></>);
 ```
-## React Properties
+## 6. React Properties
 
 We can use properties in our react components like: 
 ```HTML
@@ -145,4 +148,18 @@ export default function Header({ title, children }) {
     </header>
   );
 }
+```
+## 7. State and Immutability
+
+### 7.1 State
+
+To manipulate data and render again some component we will use the react concept of `state`,
+for this we `import {useState} from 'react';` and then we can call this function to create a state.
+The `useState` function will return an array with two values, the first one is the initial value that it's passed as parameter to the useState, the second is a function to set the value of this state and every time we call this function the react will render the state again.
+
+### 7.2 Immutability
+
+To call set state we need to pass a new object, we cannot alter the old one using not immutable functions like `Array.push()`. For one array we can create a new array using the spread operator like:
+```JS
+setProjects([...projects, newProject]);
 ```
