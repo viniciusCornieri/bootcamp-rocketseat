@@ -87,3 +87,18 @@ module.exports = {
   Now to run,
 
       yarn webpack-dev-server --mode development
+
+## Componentization
+
+A fundamental concept around React is the componentization, all the frontend is build creating and assembling web components made in react.
+
+- JSX: Javascript XML, javascript with HTML, need '@babel/preset-react' to be transpiled.
+- All files that create a React component begin with capital letter like, `App.js`.
+- Every time that we will use JSX at some file we need to `import React from 'react';` even it was not used.
+- We cannot define two components at the same level without a parent, for this we can use the react fragment tag `<></>` this will group up elements for us:
+```JS
+// wrong:
+return (<Header /><Header />)
+// right:
+return (<><Header /><Header /></>)
+```
