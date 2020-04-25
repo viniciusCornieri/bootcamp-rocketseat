@@ -1,6 +1,15 @@
-# Frontend with ReactJS
-
-## adding React to the project
+# Frontend with ReactJS  <!-- omit in toc -->
+- [Adding React to the project](#adding-react-to-the-project)
+- [Concepts](#concepts)
+  - [Adding babel and webpack to the project](#adding-babel-and-webpack-to-the-project)
+- [Configuring babel](#configuring-babel)
+  - [Babel CLI](#babel-cli)
+- [Configuring Webpack](#configuring-webpack)
+  - [Webpack-dev-server (live Reload)](#webpack-dev-server-live-reload)
+- [Componentization](#componentization)
+- [React Properties](#react-properties)
+  
+## Adding React to the project
 
     yarn add react react-dom
 
@@ -98,7 +107,42 @@ A fundamental concept around React is the componentization, all the frontend is 
 - We cannot define two components at the same level without a parent, for this we can use the react fragment tag `<></>` this will group up elements for us:
 ```JS
 // wrong:
-return (<Header /><Header />)
+return (<Header /><Header />);
 // right:
-return (<><Header /><Header /></>)
+return (<><Header /><Header /></>);
+```
+## React Properties
+
+We can use properties in our react components like: 
+```HTML
+  <Header title='some title'/>
+```
+
+To use JS variables or expressions inside JSX we need to but them inside brackets:
+```HTML
+    <header>
+      <h1>{props.title}</h1>
+    </header>
+```
+We have other property that it's called children we can pass to a component some other components like: 
+
+```HTML
+      <Header title="Title 1">
+        <ul>
+          <li>HomePage</li>
+          <li>Projects</li>
+        </ul>
+      </Header>
+```
+
+We can access the internal definition with the property `children`:
+```JS
+export default function Header({ title, children }) {
+  return (
+    <header>
+      <h1>{title}</h1>
+      {children}
+    </header>
+  );
+}
 ```
