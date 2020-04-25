@@ -11,6 +11,8 @@
 - [7. State and Immutability](#7-state-and-immutability)
   - [7.1 State](#71-state)
   - [7.2 Immutability](#72-immutability)
+- [8. Importing CSS and Images](#8-importing-css-and-images)
+  - [8.1. File Loader](#81-file-loader)
   
 ## 1. Adding React to the project
 
@@ -162,4 +164,38 @@ The `useState` function will return an array with two values, the first one is t
 To call set state we need to pass a new object, we cannot alter the old one using not immutable functions like `Array.push()`. For one array we can create a new array using the spread operator like:
 ```JS
 setProjects([...projects, newProject]);
+```
+
+## 8. Importing CSS and Images
+
+To begin using CSS and images we need to more loaders:
+
+    yarn add style-loader css-loader
+
+then add other rule to `webpack.config.js`:
+```JS
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: "style-loader" }, 
+          { loader: "css-loader" }
+          ],
+      },
+```
+
+**After this, need to reload manually the webpack-server-dev to use the new loaders.**
+
+### 8.1. File Loader
+
+    yarn add file-loader
+
+we will use the following config with the file-loader:
+```JS
+      //remember to do not put spaces after or before the pipes
+      // the 'i' tells to be case insensitive
+      {
+        test: /.*\.(jpe?g|gif|png)$/i, 
+        use: { loader: "file-loader" },
+      },
 ```
