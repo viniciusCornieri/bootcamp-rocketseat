@@ -2,6 +2,7 @@
 
 - [1. HTTP Methods](#1-http-methods)
 - [2. Parameters type](#2-parameters-type)
+- [3. Middleware](#3-middleware)
 
 ## 1. HTTP Methods
 
@@ -16,3 +17,6 @@
 - Route Params: Identify resources (Update/Delete)
 - Request Body: Content for creation or update some resource (JSON)
 
+## 3. Middleware
+
+Request interceptor, it can completely interrupt the request or change data from the request.
