@@ -13,6 +13,8 @@
   - [7.2 Immutability](#72-immutability)
 - [8. Importing CSS and Images](#8-importing-css-and-images)
   - [8.1. File Loader](#81-file-loader)
+- [9. Calling REST APIs with Axios](#9-calling-rest-apis-with-axios)
+  - [9.1. Babel processing async await](#91-babel-processing-async-await)
   
 ## 1. Adding React to the project
 
@@ -198,4 +200,23 @@ we will use the following config with the file-loader:
         test: /.*\.(jpe?g|gif|png)$/i, 
         use: { loader: "file-loader" },
       },
+```
+
+## 9. Calling REST APIs with Axios
+
+    yarn add axios
+
+Axios will be responsible to call our backend REST endpoints. When using axios we need to enable cors handling at our backend, cors it's a security feature that blocks any request of unknown source.
+
+For `useState` it's a good practice always starts with a value of the same type we will expect use. E.g., if it is an array then an empty array, `[]`, if it is an object then a empty object `{}`;
+
+### 9.1. Babel processing async await
+
+    yarn add @babel/plugin-transform-runtime -D
+
+And at `babel.config.js` add:
+```JS
+  plugins: [
+    '@babel/plugin-transform-runtime'
+  ]
 ```
