@@ -46,7 +46,7 @@ Follow the steps at [react-native.rocketseat.dev](https://react-native.rocketsea
 
 ## 3. Init mobile project
 
-    react-native init <name>
+   npx react-native init <name>
 
 ## 3. ReactJS vs React-Native
 
@@ -59,7 +59,7 @@ Follow the steps at [react-native.rocketseat.dev](https://react-native.rocketsea
   
 ## 4. Configuring AXIOS
 
-**baseUrl**
+**baseURL**
 - IOS and emulator: `localhost`
 - IOS and device: the host IP
 - Android and emulator: `localhost`
