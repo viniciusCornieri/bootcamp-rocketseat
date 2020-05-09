@@ -108,3 +108,28 @@ module.exports = {
   arrowParens: 'avoid',
 };
 
+## 4. Debugging
+
+Go to the vscode debug tab tell to create a new debug config and edit the `launch.json` :
+```JSON
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "protocol": "inspector",
+      "restart": true,
+      "name": "Debug",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    }
+  ]
+}
+```
+
+add `--inspect` flag for `ts-node-dev`
