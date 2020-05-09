@@ -1,5 +1,9 @@
 # First Node.JS project <!-- omit in toc -->
- - [1. Configuring the Environment](#1-configuring-the-environment)
+- [1. Configuring initial project Structure](#1-configuring-initial-project-structure)
+- [2. Configuring eslint](#2-configuring-eslint)
+- [2.1. Eslint resolving imports](#21-eslint-resolving-imports)
+- [3. Adding prettier dependency](#3-adding-prettier-dependency)
+- [4. Debugging](#4-debugging)
 
 ## 1. Configuring initial project Structure
 
@@ -133,3 +137,4 @@ Go to the vscode debug tab tell to create a new debug config and edit the `launc
 ```
 
 add `--inspect` flag for `ts-node-dev`
+
