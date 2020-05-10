@@ -4,6 +4,7 @@
 - [2.1. Eslint resolving imports](#21-eslint-resolving-imports)
 - [3. Adding prettier dependency](#3-adding-prettier-dependency)
 - [4. Debugging](#4-debugging)
+- [5. Date validation with date-fns](#5-date-validation-with-date-fns)
 
 ## 1. Configuring initial project Structure
 
@@ -138,3 +139,11 @@ Go to the vscode debug tab tell to create a new debug config and edit the `launc
 
 add `--inspect` flag for `ts-node-dev`
 
+## 5. Date validation with date-fns
+
+    yarn add date-fns
+
+We can use some utility methods of date-fns to validate the date, e.g.:
+- `startOfHour`: gets converts the date to the first instant of some hour;
+- `parseISO`: converts a string in date ISO format to a JS Date;
+- `isEqual`: compare to dates;
