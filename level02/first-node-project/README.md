@@ -5,6 +5,7 @@
 - [3. Adding prettier dependency](#3-adding-prettier-dependency)
 - [4. Debugging](#4-debugging)
 - [5. Date validation with date-fns](#5-date-validation-with-date-fns)
+- [6. DTO and TypeScript Omit](#6-dto-and-typescript-omit)
 
 ## 1. Configuring initial project Structure
 
@@ -147,3 +148,14 @@ We can use some utility methods of date-fns to validate the date, e.g.:
 - `startOfHour`: gets converts the date to the first instant of some hour;
 - `parseISO`: converts a string in date ISO format to a JS Date;
 - `isEqual`: compare to dates;
+
+## 6. DTO and TypeScript Omit
+
+We can use DTO `Data Transfer Objects` to make a function receive named parameters, defining interface to model our parameters.
+
+If we want use some type but ignoring some field, it's possible to use `Omit`:
+```JS
+  constructor({ provider, date }: Omit<Appointment, 'id'>) {
+    ...
+```
+This will type the parameter object with like the Appointment expect by the `'id'` field.
