@@ -6,6 +6,9 @@
 - [4. Debugging](#4-debugging)
 - [5. Date validation with date-fns](#5-date-validation-with-date-fns)
 - [6. DTO and TypeScript Omit](#6-dto-and-typescript-omit)
+- [7. Separation of Concerns and Services](#7-separation-of-concerns-and-services)
+- [8. Configuring TypeORM](#8-configuring-typeorm)
+- [8.1 Creating Migrations](#81-creating-migrations)
 
 ## 1. Configuring initial project Structure
 
@@ -159,3 +162,34 @@ If we want use some type but ignoring some field, it's possible to use `Omit`:
     ...
 ```
 This will type the parameter object with like the Appointment expect by the `'id'` field.
+
+## 7. Separation of Concerns and Services
+
+Our Routes should only be concern to receive the request, call another file, and give some response. Everything else must be abstract into a service.
+
+## 8. Configuring TypeORM
+
+    yarn add typeorm pg
+
+- We can config using the TypeORM instructions [TypeORM](https://typeorm.io/#/connection-options/postgres--cockroachdb-connection-options).
+
+Create script at `package.json` to run typeorm using TypeScript:
+
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+
+Now `yarn typeorm` will run the typeorm cli.
+
+## 8.1 Creating Migrations
+
+    yarn typeorm migration:create -n CreateAppointments
+
+That will create a new migration at `ormconfig.json` specified migrations folder.
+
+To run the migrations
+
+    yarn typeorm migration:run
+
+And to revert
+
+    yarn typeorm migration:revert
+
