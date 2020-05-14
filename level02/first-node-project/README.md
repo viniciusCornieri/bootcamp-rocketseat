@@ -8,7 +8,9 @@
 - [6. DTO and TypeScript Omit](#6-dto-and-typescript-omit)
 - [7. Separation of Concerns and Services](#7-separation-of-concerns-and-services)
 - [8. Configuring TypeORM](#8-configuring-typeorm)
-- [8.1 Creating Migrations](#81-creating-migrations)
+  - [8.1. Creating Migrations](#81-creating-migrations)
+  - [8.2. Creating the database Model(Entity)](#82-creating-the-database-modelentity)
+  - [8.3 Repository](#83-repository)
 
 ## 1. Configuring initial project Structure
 
@@ -179,7 +181,7 @@ Create script at `package.json` to run typeorm using TypeScript:
 
 Now `yarn typeorm` will run the typeorm cli.
 
-## 8.1 Creating Migrations
+### 8.1. Creating Migrations
 
     yarn typeorm migration:create -n CreateAppointments
 
@@ -192,4 +194,35 @@ To run the migrations
 And to revert
 
     yarn typeorm migration:revert
+
+### 8.2. Creating the database Model(Entity)
+
+First to we need to enable two options at our `tsconfig.json`:
+
+
+    "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
+    "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
+
+These options will allow us to use decorators. Now we can use the `@Entity('appointments')` to define that the Appointment model it's an entity of appointments table, and `@Column` or `@PrimaryGeneratedColumn` to define the properties that are database columns.
+
+We will need to disable a property of typescript that will check if class properties were initialized, because typeorm will initialize then for us:
+
+    "strictPropertyInitialization": false,    /* Enable strict checking of property initialization in classes. */
+
+### 8.3 Repository
+
+TypeORM give us `@RepositoryEntity` and `Repository` to handle the Entity data. To use the repository we can import the `getCustomRepository` from typeorm and pass the repository class as parameter, this will return the a repository that we can use.
+
+When testing we got one error "EntityMetadataNotFound: No metadata for "Appointment" was found.", because we missed two things the first one was a dependency for the typeorm annotations:
+
+    yarn add reflect-metadata
+
+And the second was configure the entity directory at `ormconfig.json`:
+
+      "entities": [
+        "./src/models/*.ts"
+      ],
+
+After that we got an error telling us that the 'id' column cannot be null, this happened because we missed the `default: uuid_generator_v4()` in our migration, we correct then revert and run again the migrations.
+
 
