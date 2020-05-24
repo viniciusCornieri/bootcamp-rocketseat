@@ -11,6 +11,7 @@
   - [8.1. Creating Migrations](#81-creating-migrations)
   - [8.2. Creating the database Model(Entity)](#82-creating-the-database-modelentity)
   - [8.3 Repository](#83-repository)
+- [9. Multer](#9-multer)
 
 ## 1. Configuring initial project Structure
 
@@ -226,3 +227,10 @@ And the second was configure the entity directory at `ormconfig.json`:
 After that we got an error telling us that the 'id' column cannot be null, this happened because we missed the `default: uuid_generator_v4()` in our migration, we correct then revert and run again the migrations.
 
 
+## 9. Multer
+
+  To handle file upload we will use the multer middleware
+
+      yarn add multer
+      yarn add -D @types/multer
+  
