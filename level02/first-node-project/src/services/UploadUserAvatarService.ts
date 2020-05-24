@@ -1,7 +1,11 @@
 import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
+
+import AppError from '../errors/AppError';
+
 import User from '../models/User';
+
 import uploadConfig from '../config/upload';
 
 interface Request {
@@ -16,7 +20,7 @@ class UploadUserAvatarService {
     const user = await userRepository.findOne({ id: user_id });
 
     if (!user) {
-      throw new Error('Only authenticated users can update avatar.');
+      throw new AppError('Only authenticated users can update avatar.', 401);
     }
 
     if (user.avatar) {
@@ -24,6 +28,7 @@ class UploadUserAvatarService {
         uploadConfig.directory,
         user.avatar,
       );
+
       const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
 
       if (userAvatarFileExists) {

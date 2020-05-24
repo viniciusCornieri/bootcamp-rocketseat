@@ -12,6 +12,7 @@
   - [8.2. Creating the database Model(Entity)](#82-creating-the-database-modelentity)
   - [8.3 Repository](#83-repository)
 - [9. Multer](#9-multer)
+- [10. Error Handling](#10-error-handling)
 
 ## 1. Configuring initial project Structure
 
@@ -234,3 +235,8 @@ After that we got an error telling us that the 'id' column cannot be null, this 
       yarn add multer
       yarn add -D @types/multer
   
+## 10. Error Handling
+
+To handle async errors from express we will need import the express-async-errors lib,
+
+      yarn add express-async-errors
