@@ -14,3 +14,7 @@ To manipulate our page routes we will use react-router-dom:
 
     yarn add react-router-dom
 
+## 3. Styled Components
+
+    yarn add styled-components
+    yarn add @types/styled-components -D
