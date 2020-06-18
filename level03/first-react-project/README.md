@@ -18,3 +18,16 @@ To manipulate our page routes we will use react-router-dom:
 
     yarn add styled-components
     yarn add @types/styled-components -D
+
+## 4. Polished
+
+Lib to handle colors (make darker, lighter, change opacity, verify contrast) made by the styled-components team
+
+    yarn add polished
+
+
+## 5. React icons
+
+Package with several icons to use.
+
+    yarn add react-icons
