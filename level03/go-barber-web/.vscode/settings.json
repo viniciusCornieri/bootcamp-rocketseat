@@ -2,6 +2,7 @@
   "cSpell.ignoreWords": [
     "esnext",
     "typeorm",
+    "unform",
     "uuidv",
     "varchar"
   ]
