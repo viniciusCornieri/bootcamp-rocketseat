@@ -1,38 +1,64 @@
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
+import * as Yup from 'yup';
 import { FiArrowLeft, FiMail, FiLock } from 'react-icons/fi';
-import logoImg from '../../assets/logo.svg';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 
+import getValidationErrors from '../../utils/getValidationErrors';
+import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { Container, Content, Background } from './styles';
 
-const SignIn: React.FC = () => (
-  <Container>
-    <Content>
-      <img src={logoImg} alt="GoBarber" />
+const SignIn: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+  const handleSubmit = useCallback(async (data: any) => {
+    try {
+      // eslint-disable-next-line no-unused-expressions
+      formRef.current?.setErrors({});
 
-      <form>
-        <h1>Faça seu logon</h1>
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string().required('Senha obrigatória'),
+      });
 
-        <Input name="email" placeholder="E-mail" icon={FiMail} />
+      await schema.validate(data, { abortEarly: false });
+    } catch (err) {
+      console.error(err);
+      // eslint-disable-next-line no-unused-expressions
+      formRef.current?.setErrors(getValidationErrors(err));
+    }
+  }, []);
+  return (
+    <Container>
+      <Content>
+        <img src={logoImg} alt="GoBarber" />
 
-        <Input
-          name="password"
-          type="password"
-          placeholder="Senha"
-          icon={FiLock}
-        />
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <h1>Faça seu logon</h1>
 
-        <Button type="submit">Entrar</Button>
-        <a href="forgot">Esqueci minha senha</a>
-      </form>
-      <a href="sign up">
-        <FiArrowLeft />
-        Criar conta
-      </a>
-    </Content>
-    <Background />
-  </Container>
-);
+          <Input name="email" placeholder="E-mail" icon={FiMail} />
+
+          <Input
+            name="password"
+            type="password"
+            placeholder="Senha"
+            icon={FiLock}
+          />
+
+          <Button type="submit">Entrar</Button>
+          <a href="forgot">Esqueci minha senha</a>
+        </Form>
+        <a href="sign up">
+          <FiArrowLeft />
+          Criar conta
+        </a>
+      </Content>
+      <Background />
+    </Container>
+  );
+};
 
 export default SignIn;
