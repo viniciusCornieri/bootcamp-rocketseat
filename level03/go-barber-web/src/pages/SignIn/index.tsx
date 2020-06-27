@@ -39,9 +39,13 @@ const SignIn: React.FC = () => {
         const { email, password } = data;
         signIn({ email, password });
       } catch (err) {
-        console.error(err);
-        // eslint-disable-next-line no-unused-expressions
-        formRef.current?.setErrors(getValidationErrors(err));
+        if (err instanceof Yup.ValidationError) {
+          console.error(err);
+          // eslint-disable-next-line no-unused-expressions
+          formRef.current?.setErrors(getValidationErrors(err));
+        }
+
+        // show toast message
       }
     },
     [signIn],
