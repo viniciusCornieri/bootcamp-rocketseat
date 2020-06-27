@@ -10,6 +10,7 @@ interface SignInCredentials {
 interface AuthContextData {
   user: Record<string, unknown>;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 interface AuthState {
@@ -19,10 +20,13 @@ interface AuthState {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
+const LOCAL_STORAGE_GO_BARBER_TOKEN = '@GoBarber:token';
+const LOCAL_STORAGE_GO_BARBER_USER = '@GoBarber:user';
+
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@GoBarber:token');
-    const user = localStorage.getItem('@GoBarber:user');
+    const token = localStorage.getItem(LOCAL_STORAGE_GO_BARBER_TOKEN);
+    const user = localStorage.getItem(LOCAL_STORAGE_GO_BARBER_USER);
 
     if (token && user) {
       return { token, user: JSON.parse(user) };
@@ -39,14 +43,21 @@ const AuthProvider: React.FC = ({ children }) => {
 
     const { token, user } = response.data;
 
-    localStorage.setItem('@GoBarber:token', token);
-    localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+    localStorage.setItem(LOCAL_STORAGE_GO_BARBER_TOKEN, token);
+    localStorage.setItem(LOCAL_STORAGE_GO_BARBER_USER, JSON.stringify(user));
 
     setData({ token, user });
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem(LOCAL_STORAGE_GO_BARBER_TOKEN);
+    localStorage.removeItem(LOCAL_STORAGE_GO_BARBER_USER);
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
