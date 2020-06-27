@@ -13,6 +13,7 @@
   - [8.3 Repository](#83-repository)
 - [9. Multer](#9-multer)
 - [10. Error Handling](#10-error-handling)
+- [11. Cors](#11-cors)
 
 ## 1. Configuring initial project Structure
 
@@ -234,9 +235,18 @@ After that we got an error telling us that the 'id' column cannot be null, this 
 
       yarn add multer
       yarn add -D @types/multer
-  
+
 ## 10. Error Handling
 
 To handle async errors from express we will need import the express-async-errors lib,
 
       yarn add express-async-errors
+
+## 11. Cors
+
+To call the endpoint at our frontend with axios we need to enable cors at our backend.
+
+    yarn add cors
+    yarn add @types/cors -D
+
+Cors will be only used by the Browser Requests.
