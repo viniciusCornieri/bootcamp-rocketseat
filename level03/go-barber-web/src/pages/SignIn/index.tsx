@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import * as Yup from 'yup';
-import { FiArrowLeft, FiMail, FiLock } from 'react-icons/fi';
+import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
@@ -46,12 +47,14 @@ const SignIn: React.FC = () => {
           console.error(err);
           // eslint-disable-next-line no-unused-expressions
           formRef.current?.setErrors(getValidationErrors(err));
+
+          return;
         }
 
         addToast({
           type: 'error',
           title: 'Erro na autenticação',
-          // description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
+          description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
         });
       }
     },
@@ -77,10 +80,10 @@ const SignIn: React.FC = () => {
           <Button type="submit">Entrar</Button>
           <a href="forgot">Esqueci minha senha</a>
         </Form>
-        <a href="sign up">
-          <FiArrowLeft />
+        <Link to="signup">
+          <FiLogIn />
           Criar conta
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>
