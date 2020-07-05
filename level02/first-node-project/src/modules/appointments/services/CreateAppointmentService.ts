@@ -3,12 +3,12 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
-import Appointment from '../infra/typeorm/entities/Appointment';
+import IAppointment from '../entities/IAppointment';
 
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
-  provider_id: string;
+  providerId: string;
   date: Date;
 }
 
@@ -19,7 +19,7 @@ class CreateAppointmentService {
     private appointmentsRepository: IAppointmentsRepository,
   ) {}
 
-  public async execute({ provider_id, date }: IRequest): Promise<Appointment> {
+  public async execute({ providerId, date }: IRequest): Promise<IAppointment> {
     const appointmentDate = startOfHour(date);
 
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
@@ -31,7 +31,7 @@ class CreateAppointmentService {
     }
 
     const appointment = this.appointmentsRepository.create({
-      provider_id,
+      providerId,
       date: appointmentDate,
     });
 

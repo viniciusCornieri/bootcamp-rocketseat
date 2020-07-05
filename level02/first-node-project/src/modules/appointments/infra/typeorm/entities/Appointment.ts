@@ -9,14 +9,15 @@ import {
 } from 'typeorm';
 
 import User from '@modules/users/infra/typeorm/entities/User';
+import IAppointment from '@modules/appointments/entities/IAppointment';
 
 @Entity('appointments')
-class Appointment {
+class Appointment implements IAppointment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  provider_id: string;
+  @Column({ name: 'provider_id' })
+  providerId: string;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'provider_id' })
@@ -25,11 +26,11 @@ class Appointment {
   @Column('timestamp with time zone')
   date: Date;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn({ name: 'update_at' })
+  updatedAt: Date;
 }
 
 export default Appointment;

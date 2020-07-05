@@ -5,7 +5,7 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import authConfig from '@config/auth';
 
-import User from '../infra/typeorm/entities/User';
+import IUser from '../entities/IUser';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 interface IRequest {
@@ -14,7 +14,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: User;
+  user: IUser;
   token: string;
 }
 
