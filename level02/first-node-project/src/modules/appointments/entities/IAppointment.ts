@@ -5,11 +5,11 @@ export default interface IAppointment {
 
   providerId: string;
 
-  provider: IUser;
+  provider?: IUser;
 
   date: Date;
 
   createdAt: Date;
 
-  updatedAt: Date;
+  updatedAt?: Date;
 }

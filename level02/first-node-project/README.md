@@ -14,6 +14,7 @@
 - [9. Multer](#9-multer)
 - [10. Error Handling](#10-error-handling)
 - [11. Cors](#11-cors)
+- [12. Tests](#12-tests)
 
 ## 1. Configuring initial project Structure
 
@@ -250,3 +251,27 @@ To call the endpoint at our frontend with axios we need to enable cors at our ba
     yarn add @types/cors -D
 
 Cors will be only used by the Browser Requests.
+
+## 12. Tests
+
+We will use jest to test our app,
+
+    yarn add jest ts-jest @types/jest -D
+    yarn jest --init
+
+At `jest.config.js` sets `presets` as `'ts-jest'` and `testMatch` as `"**/*.spec.ts"`;
+
+At `.eslintrc.json` add `"jest": true` on `env`;
+
+To jest resolve @paths configured at tsconfig should add at jest.config.js:
+```JS
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const { compilerOptions} = require('./tsconfig.json');
+
+{
+  ...
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/'}),
+  ...
+}
+
+```

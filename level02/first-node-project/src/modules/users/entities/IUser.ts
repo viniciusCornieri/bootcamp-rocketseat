@@ -7,9 +7,9 @@ export default interface IUser {
 
   password: string;
 
-  avatar: string;
+  avatar?: string;
 
   createdAt: Date;
 
-  updatedAt: Date;
+  updatedAt?: Date;
 }
