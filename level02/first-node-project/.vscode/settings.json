@@ -1,6 +1,7 @@
 {
   "cSpell.ignoreWords": [
     "dtos",
+    "originalname",
     "typeorm",
     "uuidv",
     "varchar"
