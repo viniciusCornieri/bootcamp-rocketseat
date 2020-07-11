@@ -82,3 +82,13 @@ For IOS we need to edit the `ios/appgobarber/Info.plist` adding `Feather.ttf` to
 	</array>
 ```
 
+## 6. Iphone X Helper
+
+Iphone X has an icon below the screen to close the app, to handle that size we can use the lib `react-native-iphone-x-helper`;
+
+    yarn add react-native-iphone-x-helper
+
+## 7. Avoiding keyboard overlap the app
+
+We can use a view that avoids the keyboard to hide it, `KeyboardAvoidingView`. Using `Platform` we will use the behavior only at `ios` because `android` already have this behavior as default.
+
