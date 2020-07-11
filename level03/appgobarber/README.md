@@ -49,3 +49,36 @@ or
     yarn react-native link
 
 Ater we can see the fonts inside `android/app/main/assets/fonts` or described at `ios/appgobarber/Info.plist`;
+
+
+## 5. Icons
+
+We will use the icons from react-native-vector-icons
+
+    yarn add react-native-vector-icons
+
+## 5.1 Configuring font icons at Android
+
+For Android we need to edit the file `android/app/build.gradle` and add at end of file:
+
+```Groovy
+project.ext.vectoricons = [
+  iconsFontName: ["Feather.ttf"]
+]
+
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+```
+
+## 5.2 Configuring font icons at IOS
+
+For IOS we need to edit the `ios/appgobarber/Info.plist` adding `Feather.ttf` to add the font from the lib that we installed.
+
+```XML
+	<key>UIAppFonts</key>
+	<array>
+		<string>RobotoSlab-Medium.ttf</string>
+		<string>RobotoSlab-Regular.ttf</string>
+		<string>Feather.ttf</string>
+	</array>
+```
+
