@@ -17,7 +17,7 @@ describe('CreateUser', () => {
     );
   });
 
-  it('should be able to create a new appointment', async () => {
+  it('should be able to create a new user', async () => {
     const user = await createUserService.execute({
       name: 'John Doe',
       email: 'john.doe@fakemail.com',
