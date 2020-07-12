@@ -16,6 +16,7 @@
 - [11. Cors](#11-cors)
 - [12. Tests](#12-tests)
 - [13. NodeMailer](#13-nodemailer)
+  - [13.1 E-mail Template](#131-e-mail-template)
 
 ## 1. Configuring initial project Structure
 
@@ -283,3 +284,11 @@ The lib that we will use to send e-mail it's the nodemailer,
 
     yarn add nodemailer
     yarn add @types/nodemailer -D
+
+And at development environment we will use EtherealMail to trap our e-mails sent.
+
+### 13.1 E-mail Template
+
+For handling E-mail templates we will use handlebars
+
+    yarn add handlebars
