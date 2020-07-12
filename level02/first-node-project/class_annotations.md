@@ -15,6 +15,7 @@
 - [10. Error Handling](#10-error-handling)
 - [11. Cors](#11-cors)
 - [12. Tests](#12-tests)
+- [13. NodeMailer](#13-nodemailer)
 
 ## 1. Configuring initial project Structure
 
@@ -275,3 +276,10 @@ const { compilerOptions} = require('./tsconfig.json');
 }
 
 ```
+
+## 13. NodeMailer
+
+The lib that we will use to send e-mail it's the nodemailer,
+
+    yarn add nodemailer
+    yarn add @types/nodemailer -D
