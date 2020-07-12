@@ -13,7 +13,7 @@ describe('ListProviderMonthAvailability', () => {
     );
   });
 
-  it('should be able to list the providers', async () => {
+  it('should be able to list provider day availability in a month', async () => {
     const addingPromises: Promise<IAppointment>[] = [];
     for (let hour = 8; hour <= 17; hour += 1) {
       addingPromises.push(
