@@ -1,4 +1,4 @@
-import { startOfHour } from 'date-fns';
+import { startOfHour, isBefore, getHours } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
@@ -26,6 +26,22 @@ class CreateAppointmentService {
     date,
   }: IRequest): Promise<IAppointment> {
     const appointmentDate = startOfHour(date);
+
+    if (isBefore(appointmentDate, Date.now())) {
+      throw new AppError("You can't create an appointment on a past date");
+    }
+
+    const appointmentHour = getHours(appointmentDate);
+
+    if (appointmentHour < 8 || appointmentHour > 17) {
+      throw new AppError(
+        'You can only create appointment between 08am and 05pm',
+      );
+    }
+
+    if (userId === providerId) {
+      throw new AppError("You can't create an appointment with yourself");
+    }
 
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
