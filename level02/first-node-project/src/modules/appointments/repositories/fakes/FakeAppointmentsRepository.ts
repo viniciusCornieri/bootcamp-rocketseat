@@ -13,12 +13,14 @@ export default class FakeAppointmentsRepository
 
   public async create({
     providerId,
+    userId,
     date,
   }: ICreateAppointmentDTO): Promise<IAppointment> {
     const appointment: IAppointment = {
       id: uuid(),
       date,
       providerId,
+      userId,
       createdAt: new Date(),
     };
 
