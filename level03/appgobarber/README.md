@@ -96,3 +96,6 @@ We can use a view that avoids the keyboard to hide it, `KeyboardAvoidingView`. U
 
 We want to force to focus the next input after end editing the previous one, for this we need the parent component to have access and force focus at input element. To do this we uses `useImperativeHandle` with React.RefForwardingComponent and `useForward` hook, this will allow us to inject a focus function to the given parameter ref.
 
+## 9. Async storage
+
+On mobile we will use `@react-native-community/async-storage` as replace of the web localStorage;

@@ -15,6 +15,8 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
+import { useAuth } from '../../hooks/auth';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 import Input, { InputRef } from '../../components/Input';
 import Button from '../../components/Button';
@@ -40,6 +42,8 @@ const SignIn: React.FC = () => {
   const passwordInputRef = useRef<InputRef>(null);
   const navigation = useNavigation();
   const [hideCreateAccount, setHideCreateAccount] = useState(false);
+
+  const { signIn, user } = useAuth();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -75,9 +79,7 @@ const SignIn: React.FC = () => {
       await schema.validate(data, { abortEarly: false });
 
       const { email, password } = data;
-      // await signIn({ email, password });
-
-      // history.push('/dashboard');
+      await signIn({ email, password });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -85,6 +87,8 @@ const SignIn: React.FC = () => {
 
         return;
       }
+
+      console.log(err);
 
       Alert.alert(
         'Erro na autenticação',
