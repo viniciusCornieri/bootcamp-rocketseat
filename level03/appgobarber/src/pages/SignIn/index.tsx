@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Image,
@@ -12,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
-import Input from '../../components/Input';
+import Input, { InputRef } from '../../components/Input';
 import Button from '../../components/Button';
 
 import logoImage from '../../assets/logo.png';
@@ -28,6 +29,7 @@ import {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const passwordInputRef = useRef<InputRef>(null);
   const navigation = useNavigation();
   const [hideCreateAccount, setHideCreateAccount] = useState(false);
 
@@ -74,12 +76,32 @@ const SignIn: React.FC = () => {
               style={{ width: '100%' }}
               ref={formRef}
               onSubmit={handleSignIn}>
-              <Input name="email" icon="mail" placeholder="E-mail" />
-              <Input name="password" icon="lock" placeholder="Senha" />
+              <Input
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+              />
+              <Input
+                ref={passwordInputRef}
+                name="password"
+                icon="lock"
+                placeholder="Senha"
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={() => {
+                  formRef.current?.submitForm();
+                }}
+              />
 
               <Button
                 onPress={() => {
-                  // eslint-disable-next-line no-unused-expressions
                   formRef.current?.submitForm();
                 }}>
                 Entrar

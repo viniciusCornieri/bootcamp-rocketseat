@@ -92,3 +92,7 @@ Iphone X has an icon below the screen to close the app, to handle that size we c
 
 We can use a view that avoids the keyboard to hide it, `KeyboardAvoidingView`. Using `Platform` we will use the behavior only at `ios` because `android` already have this behavior as default.
 
+## 8. UseImperativeHandle
+
+We want to force to focus the next input after end editing the previous one, for this we need the parent component to have access and force focus at input element. To do this we uses `useImperativeHandle` with React.RefForwardingComponent and `useForward` hook, this will allow us to inject a focus function to the given parameter ref.
+
