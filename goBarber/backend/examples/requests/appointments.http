@@ -1,0 +1,30 @@
+@hostname = localhost
+@port = 3333
+@host = {{hostname}}:{{port}}
+@baseURL = http://{{host}}
+
+###
+
+# @name login
+POST {{baseURL}}/sessions
+Content-Type: application/json
+
+{
+	"email": "jailson.cabelo@mail.com",
+	"password": "123456"
+}
+
+###
+
+@token = {{login.response.body.$.token}}
+
+# @name listProviderAppointments
+GET {{baseURL}}/appointments/me
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+	"day": 13,
+	"month": 7,
+	"year": 2020
+}
