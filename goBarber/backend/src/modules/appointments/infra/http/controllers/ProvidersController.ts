@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListProvidersService from '@modules/appointments/services/ListProvidersService';
 
@@ -13,11 +14,7 @@ class ProvidersController {
       userId,
     });
 
-    const providersWithoutPassword = providers.map(provider => {
-      // eslint-disable-next-line no-param-reassign
-      delete provider.password;
-      return provider;
-    });
+    const providersWithoutPassword = providers.map(p => classToClass(p));
 
     return response.json(providersWithoutPassword);
   }

@@ -7,6 +7,8 @@ import {
 } from 'typeorm';
 import IUser from '@modules/users/entities/IUser';
 
+import { Exclude, Expose } from 'class-transformer';
+
 @Entity('users')
 class User implements IUser {
   @PrimaryGeneratedColumn('uuid')
@@ -19,6 +21,7 @@ class User implements IUser {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column()
@@ -29,6 +32,13 @@ class User implements IUser {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    return this.avatar
+      ? `${process.env.APP_API_URL}/files/${this.avatar}`
+      : null;
+  }
 }
 
 export default User;

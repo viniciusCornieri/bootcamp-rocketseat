@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import AppError from '@shared/errors/AppError';
 import CreateUserService from './CreateUserService';
 import AuthenticateUserService from './AuthenticateUserService';

@@ -17,6 +17,7 @@
 - [12. Tests](#12-tests)
 - [13. NodeMailer](#13-nodemailer)
   - [13.1 E-mail Template](#131-e-mail-template)
+- [14. Class Transformer](#14-class-transformer)
 
 ## 1. Configuring initial project Structure
 
@@ -292,3 +293,9 @@ And at development environment we will use EtherealMail to trap our e-mails sent
 For handling E-mail templates we will use handlebars
 
     yarn add handlebars
+
+## 14. Class Transformer
+
+    yarn add class-transformer
+
+Class transformer will help us to manipulate and transform the data from an entity, e.g., hiding the password or building the user avatar url.
