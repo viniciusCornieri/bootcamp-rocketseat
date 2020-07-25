@@ -14,7 +14,7 @@ routes.use('/sessions', sessionsRouter);
 routes.use('/users', usersRouter);
 routes.use('/profile', profileRouter);
 routes.use('/password', passwordRouter);
-routes.use('/files', express.static(uploadConfig.uploadsFolder));
+routes.use('/files', express.static(uploadConfig.config.disk.uploadsFolder));
 routes.use('/appointments', appointmentsRouter);
 routes.use('/providers', providersController);
 
