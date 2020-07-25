@@ -18,6 +18,7 @@
 - [13. NodeMailer](#13-nodemailer)
   - [13.1 E-mail Template](#131-e-mail-template)
 - [14. Class Transformer](#14-class-transformer)
+- [15. Email service for production](#15-email-service-for-production)
 
 ## 1. Configuring initial project Structure
 
@@ -299,3 +300,8 @@ For handling E-mail templates we will use handlebars
     yarn add class-transformer
 
 Class transformer will help us to manipulate and transform the data from an entity, e.g., hiding the password or building the user avatar url.
+
+
+## 15. Email service for production
+
+There are several options, one of the recommendations is the Amazon SES. For use amazon ses we will need a domain, e.g. [google domains](https://domains.google.com/registrar), and an email account that can be provided on several places like, [zoho](https://www.zoho.com/pt-br/mail/?src=zoho-home&ireft=ohome), and Gmail.
