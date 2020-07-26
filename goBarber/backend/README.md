@@ -1,3 +1,21 @@
+# Para iniciar a aplicação
+
+## Criando os containers docker necessários pela primeira vez
+
+    docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+    docker run --name mongobarber -p 27017:27017 -d -t mongo
+    docker run --name redis -p 6379:6379 -d -t redis:alpine
+
+## Iniciando os containers docker após criados no passo anterior
+
+    docker start database
+    docker start mongobarber
+    docker start redis
+
+## Inicializando ambiente de dev
+
+    yarn dev:server
+
 # Recuperação de senha
 
 **Requisitos Funcionais**
