@@ -19,6 +19,8 @@
   - [13.1 E-mail Template](#131-e-mail-template)
 - [14. Class Transformer](#14-class-transformer)
 - [15. Email service for production](#15-email-service-for-production)
+- [16. Caching](#16-caching)
+  - [16.1. DataDog](#161-datadog)
 
 ## 1. Configuring initial project Structure
 
@@ -305,3 +307,12 @@ Class transformer will help us to manipulate and transform the data from an enti
 ## 15. Email service for production
 
 There are several options, one of the recommendations is the Amazon SES. For use amazon ses we will need a domain, e.g. [google domains](https://domains.google.com/registrar), and an email account that can be provided on several places like, [zoho](https://www.zoho.com/pt-br/mail/?src=zoho-home&ireft=ohome), and Gmail.
+
+
+## 16. Caching
+
+To handle the most used features and reduce the relational database queries we will use a cache option with redis.
+
+### 16.1. DataDog
+
+[DataDog](https://www.datadoghq.com/) can be used to monitor the database queries to see what queries are the most used to add cache to it.
