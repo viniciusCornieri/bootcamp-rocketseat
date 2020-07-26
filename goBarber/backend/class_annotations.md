@@ -21,6 +21,7 @@
 - [15. Email service for production](#15-email-service-for-production)
 - [16. Caching](#16-caching)
   - [16.1. DataDog](#161-datadog)
+- [17. Prevent DDoS attack with node-rate-limiter-flexible](#17-prevent-ddos-attack-with-node-rate-limiter-flexible)
 
 ## 1. Configuring initial project Structure
 
@@ -316,3 +317,9 @@ To handle the most used features and reduce the relational database queries we w
 ### 16.1. DataDog
 
 [DataDog](https://www.datadoghq.com/) can be used to monitor the database queries to see what queries are the most used to add cache to it.
+
+## 17. Prevent DDoS attack with node-rate-limiter-flexible
+
+    yarn add rate-limiter-flexible
+
+It will control the rate limit from which ip address to prevent brute force attacks or DDoS attacks.
