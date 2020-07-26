@@ -1,4 +1,6 @@
 import { getRepository, Repository, Not } from 'typeorm';
+import { classToClass } from 'class-transformer';
+
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO';
@@ -21,7 +23,8 @@ class UsersRepository implements IUsersRepository {
       });
     }
 
-    return this.ormRepository.find();
+    const users = this.ormRepository.find();
+    return classToClass(users);
   }
 
   public async findById(id: string): Promise<User | undefined> {

@@ -15,10 +15,16 @@ Content-Type: application/json
 }
 
 ###
-
 @token = {{login.response.body.$.token}}
 
-# @name listProviderAppointments
+# @name list_providers
+GET {{baseURL}}/providers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+###
+
+# @name list_provider_appointments
 GET {{baseURL}}/appointments/me
 Authorization: Bearer {{token}}
 Content-Type: application/json

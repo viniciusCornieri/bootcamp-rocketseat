@@ -14,9 +14,7 @@ class ProvidersController {
       userId,
     });
 
-    const providersWithoutPassword = providers.map(p => classToClass(p));
-
-    return response.json(providersWithoutPassword);
+    return response.json(providers);
   }
 }
 
