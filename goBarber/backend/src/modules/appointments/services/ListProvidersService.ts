@@ -30,6 +30,8 @@ class ListProvidersService {
 
       providers = classToClass(providers);
 
+      console.log('A query no banco foi feita');
+
       await this.cacheProvider.save(cacheKey, providers);
     }
 
