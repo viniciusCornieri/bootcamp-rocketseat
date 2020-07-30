@@ -25,12 +25,6 @@ Content-Type: application/json
 ###
 
 # @name list_provider_appointments
-GET {{baseURL}}/appointments/me
+GET {{baseURL}}/appointments/me?day=21&month=8&year=2020
 Authorization: Bearer {{token}}
 Content-Type: application/json
-
-{
-	"day": 21,
-	"month": 8,
-	"year": 2020
-}
