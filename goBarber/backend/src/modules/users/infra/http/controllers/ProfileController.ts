@@ -19,7 +19,7 @@ class ProfileController {
   public async update(request: Request, response: Response): Promise<Response> {
     const userId = request.user.id;
 
-    const { name, email, password, oldPassword } = request.body;
+    const { name, email, password, old_password: oldPassword } = request.body;
     const updateProfile = container.resolve(UpdateProfileService);
 
     const updatedUser = await updateProfile.execute({
