@@ -35,7 +35,11 @@ class S3StorageProvider implements IStorageProvider {
       })
       .promise();
 
-    await fs.promises.unlink(originalPath);
+    try {
+      await fs.promises.unlink(originalPath);
+    } catch {
+      /* ignore unlink error */
+    }
 
     return file;
   }
