@@ -50,6 +50,7 @@ const AuthProvider: React.FC = ({ children }) => {
       ]);
 
       if (token && user) {
+        api.defaults.headers.authorization = `Bearer ${token}`;
         setData({ token, user: JSON.parse(user) });
       }
 
@@ -67,6 +68,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
     const { token, user } = response.data;
 
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
     await AsyncStorage.multiSet([
       [LOCAL_STORAGE_GO_BARBER_TOKEN, token],
       [LOCAL_STORAGE_GO_BARBER_USER, JSON.stringify(user)],
@@ -80,6 +83,8 @@ const AuthProvider: React.FC = ({ children }) => {
       LOCAL_STORAGE_GO_BARBER_TOKEN,
       LOCAL_STORAGE_GO_BARBER_USER,
     ]);
+
+    api.defaults.headers.authorization = null;
 
     setData({} as AuthState);
   }, []);
