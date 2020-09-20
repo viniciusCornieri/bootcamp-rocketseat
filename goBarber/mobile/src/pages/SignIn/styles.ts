@@ -26,10 +26,10 @@ export const ForgotPasswordText = styled.Text`
 `;
 
 export const CreateAccountButton = styled.TouchableOpacity`
-  position: absolute;
+  /* position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0; */
   background-color: #312e38;
   border-top-width: 1px;
   border-color: #232129;
